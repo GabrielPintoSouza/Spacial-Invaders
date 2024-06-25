@@ -6,13 +6,14 @@ kaboom({
 
 const naveVelocidade = 300;
 const tiroVelocidade = 200;
-const alienVelocidade = 200;
+const alienVelocidade = 200;// Fazer com que aumente progressivamente a cada 25 pontos
 
 const nave = add([
     rect(50, 80),
     color(100, 100, 100),
-    pos(250, 500)
-]);
+    pos(250, 500),
+    "nave"
+]);//Mudar o ponto de ancoragem
 
 const placar = add([
     text("Pontuação: 0",{
@@ -77,5 +78,17 @@ onUpdate("alien", (a) => {
         
     }
 });
+
+//Criar um OnUpdate para que se a nave saia de tela ela seja teleportada para o lado oposto
+onUpdate("nave", (n) =>{
+    if(n.pos.x > width()){
+        n.moveTo(1, 500);
+    }else if(n.pos.x < 0){
+        n.moveTo(width(), 500);
+    }
+})
+
+
+//Criar um inimigo especial que surja a cada 25 pontos
 
 
